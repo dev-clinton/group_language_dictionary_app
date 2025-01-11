@@ -1,36 +1,69 @@
-from spanish import spanish_dictionary_app
+"""This is the group main.py code for all dictionary and our primary colours were
+red and green (for the exit and search buttons) and purple for the main G.U.I"""
+
+from tkinter import *
+
+from spanish import spanish_dictionary_app  # Import Spanish dictionary
+from Igbo_dictionary import igbo_dictionary_app  # Import igbo dictionary
+from Idoma_Dictionary import idoma_dictionary_app # Import idoma dictionary
+from yoruba import yoruba_app  # Import Yoruba dictionary
+from japanese import japanese_app  # Import Japanese dictionary
+
+
 def main():
-    while True:  #true Loop is to keep the program running
-        print("\nWelcome to this Multi_lingual Dictionary!")
-        print("Select a dictionary:")
-        print("1. Spanish")
-        print("2. Igbo (coming soon)")
-        print("3. Yoruba (coming soon)")
-        print("4. Idoma (coming soon)")
-        print("5. Japanese (coming soon)")
-        print("6. Exit")
+    # Create the main window
+    window = Tk()
+    window.title("Multilingual Dictionary")
+    window.geometry("600x550")
+    window.config(bg="#f5f5f5")  # Light background color
 
-        choice = input("Enter your choice from (1-6): ")
+    # Center the window on the screen
+    window.eval('tk::PlaceWindow . center')
 
-        if choice == "1":
-            spanish_dictionary_app()  # Calls the Spanish dictionary
+    # Add a title label
+    title_label = Label(window, text="Multilingual Dictionary", font=("Arial", 25, "bold"), bg="#f5f5f5", fg= "black")
+    title_label.pack(pady=20)
 
-            """the remaining dictionary will be added after creating the main.py code
-             for the other collaborators to join, then the code will change"""
+    # Add a subtitle
+    subtitle_label = Label(window, text="Select a dictionary to Explore!", font=("Arial", 14), bg="#f5f5f5", fg="black")
+    subtitle_label.pack(pady=10)
 
-        elif choice == "2":
-            print("sorry,The Igbo dictionary is not available yet.")
-        elif choice == "3":
-            print("sorry,The Yoruba dictionary is not available yet.")
-        elif choice == "4":
-            print("sorry,The Idoma dictionary is not available yet.")
-        elif choice == "5":
-            print(" sorry,The Japanese dictionary is not available yet.")
-        elif choice == "6":
-            print("you are Exiting the program now!")
-            break
-        else:
-            print("Invalid ,Please try again.")
-# main program
+    # Feedback label for user guidance
+    feedback_label = Label(window, text="", font=("Arial", 12), bg="#f5f5f5", fg="red")
+    feedback_label.pack(pady=10)
+
+    # Function to handle opening a dictionary
+    def open_dictionary(dictionary_app, name):
+        try:
+            feedback_label.config(text=f"Opening {name} Dictionary...")
+            window.withdraw()  # Hide the main window
+            dictionary_app()  # Open the chosen dictionary
+            window.deiconify()  # Show the main window again
+        except Exception as e:
+            feedback_label.config(text=f"Error: {e}")
+
+    # Buttons for dictionaries
+    Button(window, text="Spanish Dictionary", font=("Arial", 14), bg="#4b0082", fg="white", width=25,
+           command=lambda: open_dictionary(spanish_dictionary_app, "Spanish")).pack(pady=10)
+
+    Button(window, text="Igbo Dictionary", font=("Arial", 14), bg="#4b0082", fg="white", width=25,
+           command=lambda: open_dictionary(igbo_dictionary_app, "Igbo")).pack(pady=10)
+
+    Button(window, text="Yoruba Dictionary", font=("Arial", 14), bg="#4b0082", fg="white", width=25,
+           command=lambda: open_dictionary(yoruba_app, "Yoruba")).pack(pady=10)
+
+    Button(window, text="Idoma Dictionary", font=("Arial", 14), bg="#4b0082", fg="white", width=25,
+           command=lambda: open_dictionary(idoma_dictionary_app, "Idoma")).pack(pady=10)
+
+    Button(window, text="Japanese Dictionary", font=("Arial", 14), bg="#4b0082", fg="white", width=25,
+           command=lambda: open_dictionary(japanese_app, "Japanese")).pack(pady=10)
+
+    # Add an exit button
+    Button(window, text="Exit", font=("Arial", 14), bg="#dc143c", fg="white", width=25, command=window.destroy).pack(pady=20)
+
+    # Start the main loop
+    window.mainloop()
+
+
 if __name__ == "__main__":
     main()
