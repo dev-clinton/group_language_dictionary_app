@@ -1,2 +1,2 @@
-# group_language_dictionary_app
- A Muilti-lingual dictionary app using python and Tkinter
+# Group_Language_Dictionary_App
+ A Muilti-lingual  group dictionary app using python and  importing Tkinter g.u.i
